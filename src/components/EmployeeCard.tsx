@@ -3,11 +3,13 @@ import { Avatar, Text, Group, Paper, Popover, List } from "@mantine/core";
 
 import type { Job } from "@utils/types";
 import { createStyles } from "@mantine/core";
+import useEmployees from "@store/useEmployees";
 
 interface UserInfoIconsProps {
   avatar: string;
   name: string;
   jobs: Job[];
+  id: string;
 }
 
 const useStyles = createStyles((th) => ({
@@ -21,17 +23,33 @@ const useStyles = createStyles((th) => ({
   },
 }));
 
-export const EmployeeCard = ({ avatar, name, jobs }: UserInfoIconsProps) => {
+export const EmployeeCard = ({
+  id,
+  avatar,
+  name,
+  jobs,
+}: UserInfoIconsProps) => {
   const { classes } = useStyles();
   const [opened, setOpened] = React.useState(false);
+  const onHoveredEmployee = useEmployees((state) => state.onHovered);
+  const handleOnMoustEnter = () => {
+    setOpened(true);
+    onHoveredEmployee(id);
+  };
+
+  const handleOnMoustLeave = () => {
+    setOpened(false);
+    onHoveredEmployee(null);
+  };
+
   return (
     <Popover
       opened={opened}
       onClose={() => setOpened(false)}
       target={
         <Paper
-          onMouseEnter={() => setOpened(true)}
-          onMouseLeave={() => setOpened(false)}
+          onMouseEnter={handleOnMoustEnter}
+          onMouseLeave={handleOnMoustLeave}
           withBorder
           p='md'
           radius='md'

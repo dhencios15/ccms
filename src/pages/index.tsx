@@ -7,7 +7,8 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay, Pagination } from "swiper";
-import { Text, Title } from "@mantine/core";
+import { Space, Text, Title } from "@mantine/core";
+import { EmployeeTabe } from "@components/EmployeeTable";
 
 export default function HomePage() {
   const getEmployees = useEmployees((state) => state.employees);
@@ -26,6 +27,7 @@ export default function HomePage() {
               jobs={employee.jobs}
               avatar={employee.photo}
               name={employee.name}
+              id={employee.id}
             />
           </SwiperSlide>
         )),
@@ -55,10 +57,12 @@ export default function HomePage() {
           pauseOnMouseEnter: true,
         }}
         modules={[Autoplay, Pagination]}
-        style={{ paddingBottom: 60 }}
+        style={{ paddingBottom: 45 }}
       >
         {featuredEmployees}
       </Swiper>
+      <Space h='xl' />
+      <EmployeeTabe data={employees} />
     </AppLayout>
   );
 }

@@ -130,7 +130,7 @@ export const AppNavbar = () => {
     <Paper p='md' withBorder shadow='sm' className={classes.root}>
       <Container size={1300} className={classes.header}>
         <Link href='/' passHref>
-          <Text weight='bold' size='xl'>
+          <Text component='a' weight='bold' size='xl'>
             CCMS
           </Text>
         </Link>
