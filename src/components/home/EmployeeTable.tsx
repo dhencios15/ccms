@@ -10,12 +10,12 @@ import {
   ActionIcon,
   Badge,
 } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 import { Edit, SquarePlus, Trash } from "tabler-icons-react";
 
 import { Employee } from "@utils/types";
 import { formatDate } from "@utils/formatter";
 import useEmployees from "@store/useEmployees";
-import { useModals } from "@mantine/modals";
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -29,6 +29,7 @@ const useStyles = createStyles((theme) => ({
 interface TableSelectionProps {
   data: Employee[];
   showAction?: boolean;
+  showFeature?: boolean;
 }
 
 const isFeatured = (featured: boolean) =>
@@ -41,6 +42,7 @@ const isFeatured = (featured: boolean) =>
 export const EmployeeTable = ({
   data,
   showAction = false,
+  showFeature = false,
 }: TableSelectionProps) => {
   const modals = useModals();
   const { classes, cx } = useStyles();
@@ -85,7 +87,7 @@ export const EmployeeTable = ({
           </Group>
         </td>
         <td>{item.jobs.length}</td>
-        <td>{isFeatured(item.feature)}</td>
+        {showFeature && <td>{isFeatured(item.feature)}</td>}
         <td>{formatDate({ date: item.createdAt })}</td>
         {showAction && (
           <td>
@@ -128,7 +130,7 @@ export const EmployeeTable = ({
           <tr>
             <th>User</th>
             <th># of Jobs</th>
-            <th>is Featured</th>
+            {showFeature && <th>is Featured</th>}
             <th>Joined Date</th>
             {showAction && <th style={{ textAlign: "center" }}>Actions</th>}
           </tr>

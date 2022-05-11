@@ -1,7 +1,7 @@
-import { Button, Group, Title } from "@mantine/core";
-import { useModals } from "@mantine/modals";
 import React from "react";
 import { Plus } from "tabler-icons-react";
+import { Button, Group, Title } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 
 export const JobHeader = () => {
   const modals = useModals();

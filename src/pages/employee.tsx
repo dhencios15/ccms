@@ -19,7 +19,7 @@ export default function Employees() {
     <AppLayout>
       <EmployeeHeader />
       <Space h='xl' />
-      <EmployeeTable data={employees} showAction />
+      <EmployeeTable data={employees} showAction showFeature />
     </AppLayout>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  createStyles,
   Table,
   ScrollArea,
   Group,
@@ -8,10 +7,10 @@ import {
   ActionIcon,
   Switch,
 } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 import { Edit, Trash } from "tabler-icons-react";
 
 import { Job, JobWithEmployee } from "@utils/types";
-import { useModals } from "@mantine/modals";
 import useEmployees from "@store/useEmployees";
 
 interface TableSelectionProps {

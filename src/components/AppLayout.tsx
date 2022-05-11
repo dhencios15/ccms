@@ -1,5 +1,6 @@
 import { Container } from "@mantine/core";
 import React from "react";
+
 import { AppNavbar } from "./AppNavbar";
 
 interface Props {

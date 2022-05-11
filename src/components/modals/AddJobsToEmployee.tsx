@@ -1,9 +1,10 @@
-import { JobTable } from "@components/job/JobTable";
+import React from "react";
 import { Paper } from "@mantine/core";
 import { ContextModalProps } from "@mantine/modals";
+
 import useJobs from "@store/useJobs";
 import { Employee } from "@utils/types";
-import React from "react";
+import { JobTable } from "@components/job/JobTable";
 
 type Props = {
   employee: Employee;

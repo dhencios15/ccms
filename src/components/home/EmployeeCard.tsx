@@ -1,8 +1,8 @@
 import React from "react";
 import { Avatar, Text, Group, Paper, Popover, List } from "@mantine/core";
+import { createStyles } from "@mantine/core";
 
 import type { Job } from "@utils/types";
-import { createStyles } from "@mantine/core";
 import useEmployees from "@store/useEmployees";
 
 interface UserInfoIconsProps {
