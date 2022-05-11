@@ -37,11 +37,11 @@ export const JobTable = ({ data }: TableSelectionProps) => {
       },
     });
 
-  const onOpenDeleteJobModal = (id: string) =>
+  const onOpenDeleteJobModal = (job: JobWithEmployee) =>
     modals.openContextModal("JobDeleteModal", {
       title: `DELETE JOB`,
       innerProps: {
-        jobId: id,
+        job,
       },
     });
 
@@ -62,7 +62,7 @@ export const JobTable = ({ data }: TableSelectionProps) => {
             </Tooltip>
             <Tooltip position='top' label='Delete Employee'>
               <ActionIcon
-                // onClick={() => onOpenDeleteJobModal(item.id)}
+                onClick={() => onOpenDeleteJobModal(item)}
                 color='red'
               >
                 <Trash />

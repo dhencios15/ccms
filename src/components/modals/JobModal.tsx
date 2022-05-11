@@ -6,6 +6,7 @@ import { ContextModalProps } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 
 import { Job } from "@utils/types";
+import useJobs from "@store/useJobs";
 
 const schema = z.object({
   name: z.string(),
@@ -24,8 +25,9 @@ export default function JobModal({
   context,
 }: ContextModalProps<Props>) {
   const { job, state } = innerProps;
-  //   const onAddEmployee = useEmployees((state) => state.addEmployee);
-  //   const onUpdateEmployee = useEmployees((state) => state.updateEmployee);
+  const onAddJob = useJobs((state) => state.addJob);
+  const onUpdateJob = useJobs((state) => state.updateJob);
+
   const form = useForm<FormType>({
     schema: zodResolver(schema),
     initialValues: {
@@ -37,9 +39,7 @@ export default function JobModal({
     const isAdding = state === "Add";
     const pastenseAction = isAdding ? "Added" : "Updated";
 
-    // isAdding
-    //   ? onAddEmployee(data)
-    //   : employee?.id && onUpdateEmployee(data, employee?.id);
+    isAdding ? onAddJob(data) : job?.id && onUpdateJob(data, job?.id);
 
     showNotification({
       title: `${state} Success`,
