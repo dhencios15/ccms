@@ -1,6 +1,6 @@
 import React from "react";
-import { Trash } from "tabler-icons-react";
-import { Button, Center, Group, Paper, Text } from "@mantine/core";
+import { AlertCircle, Trash } from "tabler-icons-react";
+import { Alert, Button, Center, Group, Paper, Text } from "@mantine/core";
 import { ContextModalProps } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 
@@ -29,11 +29,25 @@ export const JobDeleteModal = ({
     context.closeModal(id);
   };
 
+  const jobHasEmployee = job.employees.length > 0;
+
   return (
     <Paper py={6} radius='md'>
-      <Center mb='xl'>
-        <Text>Are you sure you want to delete this job?</Text>
-      </Center>
+      {jobHasEmployee ? (
+        <Alert
+          mb='xl'
+          icon={<AlertCircle size={16} />}
+          title='Warning!'
+          color='red'
+        >
+          Cannot delete {job.name}. there are {job.employees.length} assigned to
+          this job.
+        </Alert>
+      ) : (
+        <Center mb='xl'>
+          <Text>Are you sure you want to delete this job?</Text>
+        </Center>
+      )}
       <Group position='center'>
         <Button
           onClick={() => context.closeModal(id)}
@@ -47,6 +61,7 @@ export const JobDeleteModal = ({
           onClick={handleDeleteJob}
           type='submit'
           color='red'
+          disabled={jobHasEmployee}
           leftIcon={<Trash />}
         >
           Yes, Delete

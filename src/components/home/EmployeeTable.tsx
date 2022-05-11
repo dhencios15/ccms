@@ -63,6 +63,15 @@ export const EmployeeTable = ({
       },
     });
 
+  const onOpenAddJobsToEmployeeModal = (employee: Employee) =>
+    modals.openContextModal("AddJobsToEmployee", {
+      title: `APPLY JOB TO EMPLOYEE`,
+      innerProps: {
+        employee,
+      },
+      size: "xl",
+    });
+
   const rows = data.map((item) => {
     const selected = item.id === hoveredEmployee;
     return (
@@ -99,7 +108,7 @@ export const EmployeeTable = ({
               </Tooltip>
               <Tooltip position='top' label='View Employee Job'>
                 <ActionIcon
-                  // onClick={() => openDeleteModal(item)}
+                  onClick={() => onOpenAddJobsToEmployeeModal(item)}
                   color='blue'
                 >
                   <SquarePlus />

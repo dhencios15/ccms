@@ -1,3 +1,4 @@
+import { AddJobsToEmployee } from "./AddJobsToEmployee";
 import { EmployeeDeleteModal } from "./EmployeeDeleteModal";
 import EmployeeModal from "./EmployeeModal";
 import { JobDeleteModal } from "./JobDeleteModal";
@@ -8,4 +9,5 @@ export const modals = {
   EmployeeDeleteModal: EmployeeDeleteModal,
   JobModal: JobModal,
   JobDeleteModal: JobDeleteModal,
+  AddJobsToEmployee: AddJobsToEmployee,
 };
