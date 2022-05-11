@@ -7,7 +7,7 @@ export type Employee = {
   jobs: Job[];
 };
 
-export type CreateEmployee = Omit<Employee, "jobs">;
+export type CreateEmployee = Omit<Employee, "jobs" | "createdAt" | "id">;
 
 export type Job = {
   id: string;

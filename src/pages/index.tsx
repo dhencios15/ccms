@@ -1,14 +1,14 @@
-import { AppLayout } from "@components/AppLayout";
-import { EmployeeCard } from "@components/EmployeeCard";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Space, Text } from "@mantine/core";
+import { Autoplay, Pagination } from "swiper";
+
 import useEmployees from "@store/useEmployees";
 import { Employee } from "@utils/types";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import { Autoplay, Pagination } from "swiper";
-import { Space, Text, Title } from "@mantine/core";
-import { EmployeeTabe } from "@components/EmployeeTable";
+import { EmployeeCard } from "@components/home/EmployeeCard";
+import { AppLayout } from "@components/AppLayout";
+import { EmployeeTabe } from "@components/home/EmployeeTable";
 
 export default function HomePage() {
   const getEmployees = useEmployees((state) => state.employees);
@@ -16,7 +16,7 @@ export default function HomePage() {
 
   // https://nextjs.org/docs/messages/react-hydration-error
   React.useEffect(() => setEmployees(getEmployees), [getEmployees]);
-
+  console.log(employees);
   const featuredEmployees = React.useMemo(
     () =>
       employees

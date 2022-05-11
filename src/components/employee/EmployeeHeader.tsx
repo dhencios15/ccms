@@ -9,7 +9,9 @@ export const EmployeeHeader = () => {
   const onOpenCreateEmployeeModal = () =>
     modals.openContextModal("EmployeeModal", {
       title: `CREATE EMPLOYEE`,
-      innerProps: {},
+      innerProps: {
+        state: "Add",
+      },
     });
 
   return (

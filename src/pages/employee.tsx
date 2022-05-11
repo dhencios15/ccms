@@ -1,11 +1,12 @@
-import { AppLayout } from "@components/AppLayout";
-import { EmployeeHeader } from "@components/employee/EmployeeHeader";
-import { EmployeeTabe } from "@components/EmployeeTable";
-import { Button, Group, Space, Title } from "@mantine/core";
+import React from "react";
+import { Space } from "@mantine/core";
+
 import useEmployees from "@store/useEmployees";
 import { Employee } from "@utils/types";
-import React from "react";
-import { Plus } from "tabler-icons-react";
+
+import { EmployeeHeader } from "@components/employee/EmployeeHeader";
+import { AppLayout } from "@components/AppLayout";
+import { EmployeeTabe } from "@components/home/EmployeeTable";
 
 export default function Employees() {
   const getEmployees = useEmployees((state) => state.employees);
