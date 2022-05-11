@@ -99,12 +99,12 @@ const links = [
     link: "/",
   },
   {
-    label: "Empolyee",
-    link: "/employee",
-  },
-  {
     label: "Job",
     link: "/job",
+  },
+  {
+    label: "Empolyee",
+    link: "/employee",
   },
 ];
 

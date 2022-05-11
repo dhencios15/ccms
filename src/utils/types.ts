@@ -7,6 +7,8 @@ export type Employee = {
   jobs: Job[];
 };
 
+export type CreateEmployee = Omit<Employee, "jobs">;
+
 export type Job = {
   id: string;
   name: string;

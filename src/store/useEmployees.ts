@@ -1,29 +1,32 @@
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { faker } from "@faker-js/faker";
-import ShortUniqueId from "short-unique-id";
 
 import type { Employee } from "@utils/types";
-import dayjs from "dayjs";
+import {
+  generateDate,
+  generateId,
+  generateJobTitle,
+  generatePeopleImage,
+  generatePeopleName,
+} from "@utils/valueGenerator";
 
 interface EmployeeState {
   employees: Array<Employee>;
   hoveredEmployee: string | null;
   onHovered: (id: string | null) => void;
+  addEmployee: (employee: Employee) => void;
 }
 
-const uid = new ShortUniqueId();
-
 const initEmployee: Array<Employee> = new Array(5).fill(null).map((_) => ({
-  id: uid(),
-  name: faker.name.findName(),
-  photo: faker.image.people(1234, 2345, true),
+  id: generateId(),
+  name: generatePeopleName(),
+  photo: generatePeopleImage(),
   feature: true,
-  createdAt: `${dayjs(new Date())}`,
+  createdAt: `${generateDate()}`,
   jobs: new Array(3).fill(null).map((_) => ({
-    id: uid(),
-    name: faker.name.jobTitle(),
-    createdAt: `${dayjs(new Date())}`,
+    id: generateId(),
+    name: generateJobTitle(),
+    createdAt: `${generateDate()}`,
   })),
 }));
 
@@ -33,6 +36,8 @@ const useEmployees = create<EmployeeState>()(
       employees: initEmployee,
       hoveredEmployee: null,
       onHovered: (id) => set(() => ({ hoveredEmployee: id })),
+      addEmployee: (employee) =>
+        set((state) => ({ employees: [employee, ...state.employees] })),
     }))
   )
 );

@@ -72,6 +72,7 @@ export const EmployeeCard = ({
       withArrow
     >
       <Paper>
+        <Text size='sm'>Job list:</Text>
         <List>
           {jobs.map((job) => (
             <List.Item key={job.id} className={classes.job}>
