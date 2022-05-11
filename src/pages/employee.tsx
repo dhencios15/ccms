@@ -6,7 +6,7 @@ import { Employee } from "@utils/types";
 
 import { EmployeeHeader } from "@components/employee/EmployeeHeader";
 import { AppLayout } from "@components/AppLayout";
-import { EmployeeTabe } from "@components/home/EmployeeTable";
+import { EmployeeTable } from "@components/home/EmployeeTable";
 
 export default function Employees() {
   const getEmployees = useEmployees((state) => state.employees);
@@ -19,7 +19,7 @@ export default function Employees() {
     <AppLayout>
       <EmployeeHeader />
       <Space h='xl' />
-      <EmployeeTabe data={employees} />
+      <EmployeeTable data={employees} showAction />
     </AppLayout>
   );
 }

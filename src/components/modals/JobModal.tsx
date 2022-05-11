@@ -1,50 +1,45 @@
 import React from "react";
 import { z } from "zod";
-import { Button, Checkbox, Paper, TextInput } from "@mantine/core";
+import { Button, Paper, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { ContextModalProps } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 
-import useEmployees from "@store/useEmployees";
-import { Employee } from "@utils/types";
+import { Job } from "@utils/types";
 
 const schema = z.object({
   name: z.string(),
-  photo: z.string().url(),
-  feature: z.boolean(),
 });
 
 export type FormType = z.infer<typeof schema>;
 
 type Props = {
   state: "Update" | "Add";
-  employee?: Employee;
+  job?: Job;
 };
 
-export default function EmployeeModal({
+export default function JobModal({
   innerProps,
   id,
   context,
 }: ContextModalProps<Props>) {
-  const { employee, state } = innerProps;
-  const onAddEmployee = useEmployees((state) => state.addEmployee);
-  const onUpdateEmployee = useEmployees((state) => state.updateEmployee);
+  const { job, state } = innerProps;
+  //   const onAddEmployee = useEmployees((state) => state.addEmployee);
+  //   const onUpdateEmployee = useEmployees((state) => state.updateEmployee);
   const form = useForm<FormType>({
     schema: zodResolver(schema),
     initialValues: {
-      name: employee?.name || "",
-      photo: employee?.photo || "",
-      feature: employee?.feature ? true : false,
+      name: job?.name || "",
     },
   });
-  console.log({ employee });
+
   const onSubmitForm = (data: FormType) => {
     const isAdding = state === "Add";
     const pastenseAction = isAdding ? "Added" : "Updated";
 
-    isAdding
-      ? onAddEmployee(data)
-      : employee?.id && onUpdateEmployee(data, employee?.id);
+    // isAdding
+    //   ? onAddEmployee(data)
+    //   : employee?.id && onUpdateEmployee(data, employee?.id);
 
     showNotification({
       title: `${state} Success`,
@@ -71,19 +66,9 @@ export default function EmployeeModal({
         mt='xs'
         required
       />
-      <TextInput
-        {...form.getInputProps("photo")}
-        label='Photo (url)'
-        mt='xs'
-        required
-      />
-      <Checkbox
-        {...form.getInputProps("feature", { type: "checkbox" })}
-        mt='sm'
-        label='featured this employee ?'
-      />
+
       <Button type='submit' color='green' fullWidth mt='xl'>
-        {state} Employee
+        {state} Job
       </Button>
     </Paper>
   );

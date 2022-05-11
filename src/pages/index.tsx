@@ -8,7 +8,7 @@ import { Employee } from "@utils/types";
 
 import { EmployeeCard } from "@components/home/EmployeeCard";
 import { AppLayout } from "@components/AppLayout";
-import { EmployeeTabe } from "@components/home/EmployeeTable";
+import { EmployeeTable } from "@components/home/EmployeeTable";
 
 export default function HomePage() {
   const getEmployees = useEmployees((state) => state.employees);
@@ -62,7 +62,7 @@ export default function HomePage() {
         {featuredEmployees}
       </Swiper>
       <Space h='xl' />
-      <EmployeeTabe data={employees} />
+      <EmployeeTable data={employees} />
     </AppLayout>
   );
 }

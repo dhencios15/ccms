@@ -72,14 +72,22 @@ export const EmployeeCard = ({
       withArrow
     >
       <Paper>
-        <Text size='sm'>Job list:</Text>
-        <List>
-          {jobs.map((job) => (
-            <List.Item key={job.id} className={classes.job}>
-              {job.name}
-            </List.Item>
-          ))}
-        </List>
+        {jobs.length ? (
+          <>
+            <Text size='sm'>Job list:</Text>
+            <List>
+              {jobs.map((job) => (
+                <List.Item key={job.id} className={classes.job}>
+                  {job.name}
+                </List.Item>
+              ))}
+            </List>
+          </>
+        ) : (
+          <Text align='center' size='sm' color='red'>
+            No jobs assigned yet.
+          </Text>
+        )}
       </Paper>
     </Popover>
   );

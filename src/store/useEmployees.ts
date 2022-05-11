@@ -5,7 +5,6 @@ import type { CreateEmployee, Employee } from "@utils/types";
 import {
   generateDate,
   generateId,
-  generateJobTitle,
   generatePeopleImage,
   generatePeopleName,
 } from "@utils/valueGenerator";
@@ -25,11 +24,7 @@ const initEmployee: Array<Employee> = new Array(5).fill(null).map((_) => ({
   photo: generatePeopleImage(),
   feature: true,
   createdAt: `${generateDate()}`,
-  jobs: new Array(3).fill(null).map((_) => ({
-    id: generateId(),
-    name: generateJobTitle(),
-    createdAt: `${generateDate()}`,
-  })),
+  jobs: [],
 }));
 
 const useEmployees = create<EmployeeState>()(
@@ -50,9 +45,20 @@ const useEmployees = create<EmployeeState>()(
         }),
       updateEmployee: (employee, id) =>
         set((state) => {
-          let updateEmployee = state.employees.find((d) => d.id === id);
-          console.log(updateEmployee);
-          return { employees: [...state.employees] };
+          const getEmployeeToUpdate = state.employees.find((d) => d.id === id);
+          const updatedEmployees = state.employees.map((currentEmployee) => {
+            if (getEmployeeToUpdate?.id === currentEmployee.id) {
+              return {
+                ...currentEmployee,
+                name: employee.name,
+                feature: employee.feature,
+                photo: employee.photo,
+              };
+            }
+
+            return currentEmployee;
+          });
+          return { employees: updatedEmployees };
         }),
       deleteEmployee: (id) =>
         set((state) => {

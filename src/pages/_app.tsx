@@ -7,6 +7,7 @@ import "swiper/css/bundle";
 import "../styles/globals.css";
 
 import { modals } from "@components/modals";
+import { NotificationsProvider } from "@mantine/notifications";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -29,7 +30,9 @@ export default function App(props: AppProps) {
         }}
       >
         <ModalsProvider modals={modals}>
-          <Component {...pageProps} />
+          <NotificationsProvider position='top-right'>
+            <Component {...pageProps} />
+          </NotificationsProvider>
         </ModalsProvider>
       </MantineProvider>
     </>

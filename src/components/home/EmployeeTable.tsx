@@ -28,6 +28,7 @@ const useStyles = createStyles((theme) => ({
 
 interface TableSelectionProps {
   data: Employee[];
+  showAction?: boolean;
 }
 
 const isFeatured = (featured: boolean) =>
@@ -37,7 +38,10 @@ const isFeatured = (featured: boolean) =>
     <Badge color='orange'>not featured</Badge>
   );
 
-export const EmployeeTabe = ({ data }: TableSelectionProps) => {
+export const EmployeeTable = ({
+  data,
+  showAction = false,
+}: TableSelectionProps) => {
   const modals = useModals();
   const { classes, cx } = useStyles();
   const hoveredEmployee = useEmployees((state) => state.hoveredEmployee);
@@ -74,34 +78,36 @@ export const EmployeeTabe = ({ data }: TableSelectionProps) => {
         <td>{item.jobs.length}</td>
         <td>{isFeatured(item.feature)}</td>
         <td>{formatDate({ date: item.createdAt })}</td>
-        <td>
-          <Group position='center'>
-            <Tooltip position='top' label='Edit Employee'>
-              <ActionIcon
-                onClick={() => onOpenUpdateEmployeeModal(item)}
-                color='green'
-              >
-                <Edit />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip position='top' label='Delete Employee'>
-              <ActionIcon
-                onClick={() => onOpenDeleteEmployeeModal(item.id)}
-                color='red'
-              >
-                <Trash />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip position='top' label='View Employee Job'>
-              <ActionIcon
-                // onClick={() => openDeleteModal(item)}
-                color='blue'
-              >
-                <SquarePlus />
-              </ActionIcon>
-            </Tooltip>
-          </Group>
-        </td>
+        {showAction && (
+          <td>
+            <Group position='center'>
+              <Tooltip position='top' label='Edit Employee'>
+                <ActionIcon
+                  onClick={() => onOpenUpdateEmployeeModal(item)}
+                  color='green'
+                >
+                  <Edit />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip position='top' label='Delete Employee'>
+                <ActionIcon
+                  onClick={() => onOpenDeleteEmployeeModal(item.id)}
+                  color='red'
+                >
+                  <Trash />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip position='top' label='View Employee Job'>
+                <ActionIcon
+                  // onClick={() => openDeleteModal(item)}
+                  color='blue'
+                >
+                  <SquarePlus />
+                </ActionIcon>
+              </Tooltip>
+            </Group>
+          </td>
+        )}
       </tr>
     );
   });
@@ -115,7 +121,7 @@ export const EmployeeTabe = ({ data }: TableSelectionProps) => {
             <th># of Jobs</th>
             <th>is Featured</th>
             <th>Joined Date</th>
-            <th style={{ textAlign: "center" }}>Actions</th>
+            {showAction && <th style={{ textAlign: "center" }}>Actions</th>}
           </tr>
         </thead>
         <tbody>{rows}</tbody>

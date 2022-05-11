@@ -14,3 +14,5 @@ export type Job = {
   name: string;
   createdAt: string;
 };
+
+export type JobWithEmployee = Job & { employees: Employee[] };

@@ -1,8 +1,10 @@
-import { Button, Center, Group, Paper, Text } from "@mantine/core";
-import { ContextModalProps } from "@mantine/modals";
-import useEmployees from "@store/useEmployees";
 import React from "react";
 import { Trash } from "tabler-icons-react";
+import { Button, Center, Group, Paper, Text } from "@mantine/core";
+import { ContextModalProps } from "@mantine/modals";
+import { showNotification } from "@mantine/notifications";
+
+import useEmployees from "@store/useEmployees";
 
 type Props = {
   employeeId: string;
@@ -18,6 +20,11 @@ export const EmployeeDeleteModal = ({
 
   const handleDeleteEmployee = () => {
     onDeleteEmployee(employeeId);
+    showNotification({
+      title: `Delete Success`,
+      message: ``,
+      color: "green",
+    });
     context.closeModal(id);
   };
 
